@@ -1,0 +1,29 @@
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+  <div class="form-group">
+      <label>First Name</label>
+      <input type="text"
+             class="form-control">
+    </div>
+  <p>
+    <label for="firstname">First Name</label>
+    <input type="text" name="firstname" ngModel>
+  </p>
+  <p>
+    <label for="email">Mobile </label>
+    <input type="text" name="email" ngModel>
+  </p>
+
+  <p>
+    <label for="Barber">Barber Name </label>
+    <select name="Barber" ngModel>
+    <option [ngValue]="c.id" *ngFor="let c of BarberList">
+      {{c.name}}
+    </option>
+  </select>
+  </p>
+
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+  {{contactForm.value | json}}
+</form>
