@@ -1,5 +1,5 @@
 <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
-
+  <b>Crate Customer</b>
   <p>
     <label for="name">First Name</label>
     <input type="text" name="name" ngModel>
@@ -23,6 +23,8 @@
   </p>
   <!-- {{contactForm.value | json}} -->
   <hr>
+  <b>All Customer</b>
+  <br>
   <br>
   <label for="BarberFilter">Barber Name </label>
   <select name="BarberFilter" (change)="onChange($event)">
@@ -56,6 +58,8 @@
   </table>
 
   <hr>
+  <br>
+  <b>Crate Customer</b>
   <table>
     <tr>
       <th>Barber Name</th>
@@ -69,13 +73,3 @@
 
 
 </form>
-
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
