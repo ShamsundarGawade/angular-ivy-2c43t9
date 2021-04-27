@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { first } from "rxjs/operators";
 import { Barber } from "../barber";
 import { Customer } from "../customer";
 import { SharedserviceService } from "../sharedservice.service";
@@ -12,19 +13,28 @@ export class UserStory1Component implements OnInit {
   constructor(private userService: SharedserviceService) {}
   customerList: Array<Customer> = [];
   filterCustomerList: Array<Customer> = [];
-
+  name: string = "";
+  mobile: string = "";
   BarberList: Barber[] = [
     new Barber("1", "Joe", ""),
     new Barber("2", "Gary", "")
   ];
-  ngOnInit() {}
+  ngOnInit() {
+    debugger;
+    this.userService.getCuctomer.subscribe(user => {
+      this.customerList = user;
+    });
+  }
+
   onSubmit(contactForm: { value: Customer }) {
     debugger;
     contactForm.value.isActive = false;
     this.customerList.push(contactForm.value);
     this.filterCustomerList = this.customerList;
     console.log(this.customerList);
-    this.userService.editUser(this.customerList);
+    this.userService.updateData(this.customerList);
+    this.name = "";
+    this.mobile = "";
   }
   onChange(val: any) {
     debugger;

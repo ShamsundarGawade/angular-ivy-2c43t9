@@ -1,5 +1,6 @@
 import { Time } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { first } from "rxjs/operators";
 import { Customer } from "../customer";
 import { SharedserviceService } from "../sharedservice.service";
 
@@ -8,13 +9,13 @@ import { SharedserviceService } from "../sharedservice.service";
   templateUrl: "./user-story2.component.html",
   styleUrls: ["./user-story2.component.css"]
 })
-export class UserStory2Component implements OnInit {
+export class UserStory2Component implements OnInit, OnDestroy {
   constructor(private userService: SharedserviceService) {}
   currentTime: Date = new Date();
   customerList: Array<Customer> = [];
   counter: number = 15;
   ngOnInit() {
-    this.userService.castUser.subscribe(user => {
+    this.userService.getCuctomer.subscribe(user => {
       this.customerList = user;
       this.customerList.forEach(x => {
         let date = new Date();
@@ -23,10 +24,13 @@ export class UserStory2Component implements OnInit {
           .toString();
         //this.counter += this.counter;
       });
-      setInterval(() => {
-        this.currentTime = new Date();
-      }, 1000);
     });
+    setInterval(() => {
+      this.currentTime = new Date();
+    }, 1000);
+  }
+  ngOnDestroy() {
+    this.userService.updateData(this.customerList);
   }
   click(mobile: number, barberId: string) {
     debugger;

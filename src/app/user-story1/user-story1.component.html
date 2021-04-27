@@ -2,11 +2,11 @@
   <b>Crate Customer</b>
   <p>
     <label for="name">First Name</label>
-    <input type="text" name="name" ngModel>
+    <input type="text" name="name" [(ngModel)]="name">
   </p>
   <p>
     <label for="mobile">Mobile </label>
-    <input type="text" name="mobile" ngModel>
+    <input type="text" name="mobile" [(ngModel)]="mobile">
   </p>
 
   <!-- <p>
@@ -59,7 +59,7 @@
 
   <hr>
   <br>
-  <b>Crate Customer</b>
+  <b>Current Customer</b>
   <table>
     <tr>
       <th>Barber Name</th>
