@@ -1,0 +1,75 @@
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+  <b>Crate Customer</b>
+  <p>
+    <label for="name">First Name</label>
+    <input type="text" name="name" ngModel>
+  </p>
+  <p>
+    <label for="mobile">Mobile </label>
+    <input type="text" name="mobile" ngModel>
+  </p>
+
+  <!-- <p>
+    <label for="barber">Barber Name </label>
+    <select name="barber" ngModel>
+    <option [ngValue]="c.id" *ngFor="let c of BarberList">
+      {{c.name}}
+    </option>
+  </select>
+  </p> -->
+
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+  <!-- {{contactForm.value | json}} -->
+  <hr>
+  <b>All Customer</b>
+  <br>
+  <br>
+  <label for="BarberFilter">Barber Name </label>
+  <select name="BarberFilter" (change)="onChange($event)">
+    <option [value]="c.id" *ngFor="let c of BarberList">
+      {{c.name}}
+    </option>
+  </select>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>Satus</th>
+      <th>Select Barber</th>
+    </tr>
+    <tr *ngFor="let c of filterCustomerList">
+      <td>{{c.name}}</td>
+      <td>{{c.mobile}}</td>
+      <td><input *ngIf=" !c.isActive; else active" type="button" value="In Chair" (click)="click(c.mobile,actions.value)">
+        <ng-template #active>
+          {{c.isActive}}
+        </ng-template>
+      </td>
+      <td>
+        <select #actions name={{c.mobile}}{{c.name}}>
+    <option [value]="c.id" *ngFor="let c of BarberList">
+      {{c.name}}
+    </option>
+  </select>
+      </td>
+    </tr>
+  </table>
+
+  <hr>
+  <br>
+  <b>Crate Customer</b>
+  <table>
+    <tr>
+      <th>Barber Name</th>
+      <th>Active Customer</th>
+    </tr>
+    <tr *ngFor="let c of BarberList">
+      <td>{{c.name}}</td>
+      <td>{{c.customerName}}</td>
+    </tr>
+  </table>
+
+
+</form>
