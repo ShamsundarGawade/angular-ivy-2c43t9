@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { Barber } from "../barber";
+import { Customer } from "../customer";
+import { SharedserviceService } from "../sharedservice.service";
 
 @Component({
   selector: "app-user-story1",
@@ -6,6 +9,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./user-story1.component.css"]
 })
 export class UserStory1Component implements OnInit {
+  constructor(private userService: SharedserviceService) {}
   customerList: Array<Customer> = [];
   filterCustomerList: Array<Customer> = [];
 
@@ -13,8 +17,6 @@ export class UserStory1Component implements OnInit {
     new Barber("1", "Joe", ""),
     new Barber("2", "Gary", "")
   ];
-  constructor() {}
-
   ngOnInit() {}
   onSubmit(contactForm: { value: Customer }) {
     debugger;
@@ -22,6 +24,7 @@ export class UserStory1Component implements OnInit {
     this.customerList.push(contactForm.value);
     this.filterCustomerList = this.customerList;
     console.log(this.customerList);
+    this.userService.editUser(this.customerList);
   }
   onChange(val: any) {
     debugger;
@@ -41,30 +44,5 @@ export class UserStory1Component implements OnInit {
     console.log("dfdfdfsdfds");
     console.log(event);
     console.log(val);
-  }
-}
-
-export class Barber {
-  id: string;
-  name: string;
-  customerName: string;
-
-  constructor(id: string, name: string, customerName: string) {
-    this.id = id;
-    this.name = name;
-    this.customerName = customerName;
-  }
-}
-export class Customer {
-  name: string;
-  mobile: number;
-  barber: number;
-  isActive: boolean;
-  isComplited: boolean;
-  constructor(name: string, mobile: number, barber: number, isActive: boolean) {
-    this.name = name;
-    this.mobile = mobile;
-    this.barber = barber;
-    this.isActive = isActive;
   }
 }
